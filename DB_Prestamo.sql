@@ -405,7 +405,14 @@ select * from cliente;
 alter table prestamos drop column gastos_ley_pre
 
 select 
-a.id, b.nombre, a.detalle_pre, a.moneda_pre, a.fecha_pre, a.tipo_pre, a.cuotas_pagada_pre,
+a.id, b.nombre, d2.nombre 'agente', d.nombre 'cobrador', a.detalle_pre, a.moneda_pre, a.fecha_pre, a.tipo_pre, a.cuotas_pagada_pre,
 a.balance_pre, a.monto_pre, a.interes_pre, a.cuotas_pre, a.dia_pre, a.dias_cuota_pre, a.estado_pre
 from prestamos a 
 Left join cliente b ON a.cod_cli_pre = b.id
+LEFT join cobradores c ON a.cobrador_cob_pre = c.id
+LEFT JOIN empleado d ON c.empleado = d.id
+LEFT JOIN empleado d2 ON a.agente_age_pre = d2.id
+where a.fecha_pre between '17/12/2023' and '18/12/2023'
+
+
+select a.id, b.nombre, d2.nombre 'agente', d.nombre 'cobrador', a.detalle_pre, a.moneda_pre, a.fecha_pre, a.tipo_pre, a.cuotas_pagada_pre, a.balance_pre, a.monto_pre, a.interes_pre, a.cuotas_pre, a.dia_pre, a.dias_cuota_pre, a.estado_pre from prestamos a LEFT JOIN cliente b ON a.cod_cli_pre = b.id LEFT join cobradores c ON a.cobrador_cob_pre = c.id LEFT JOIN empleado d ON c.empleado = d.id LEFT JOIN empleado d2 ON a.agente_age_pre = d2.id
